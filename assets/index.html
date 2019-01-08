@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Employees</title>
+</head>
+
+<body>
+  <h1><b>Employees</b></h1>
+  <h2>[A Golang Webapp]</h2>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Team</th>
+    </tr>
+  </table>
+  <br/>
+
+
+  <form action="/employee" method="post">
+    Name:
+    <input type="text" name="name">
+    <br/> Team:
+    <input type="text" name="team">
+    <br/>
+    <input type="submit" value="Submit">
+  </form>
+
+   <script>
+    employeeTable = document.querySelector("table")
+
+    fetch("/employee")
+      .then(response => response.json())
+      .then(employeeList => {
+        employeeList.forEach(employee => {
+          row = document.createElement("tr")
+          ename = document.createElement("td")
+          ename.innerHTML = employee.name
+          eteam = document.createElement("td")
+          eteam.innerHTML = employee.team
+          row.appendChild(ename)
+          row.appendChild(eteam)
+          employeeTable.appendChild(row)
+        })
+      })
+  </script>
+</body>
+
+</html>
